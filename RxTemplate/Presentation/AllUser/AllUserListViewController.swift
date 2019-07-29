@@ -8,9 +8,16 @@
 
 import RxSwift
 import RxCocoa
+import RxDataSources
+import Kingfisher
 
 final class AllUserListViewController: BaseViewController, BindViewType {
 
+  //MARK: - Constant
+  struct Constant {
+    static let rowHeight: CGFloat = 80
+  }
+  
   
   //MARK: - UI Properties
   @IBOutlet weak var tableView: UITableView!
@@ -19,7 +26,7 @@ final class AllUserListViewController: BaseViewController, BindViewType {
   //MARK: - Properties
   typealias ViewModel = AllUserListViewModel
   var disposeBag = DisposeBag()
-  var userModels: [UserModel] = []
+  var dataSource: RxTableViewSectionedReloadDataSource<SectionOfUserModel>?
   
   
   
@@ -45,6 +52,7 @@ final class AllUserListViewController: BaseViewController, BindViewType {
 //MARK: - Bind
 extension AllUserListViewController {
   
+  //OUTPUT
   func command(viewModel: AllUserListViewModel) {
     
     let obViewDidLoad = rx.viewDidLoad.map {
@@ -55,19 +63,30 @@ extension AllUserListViewController {
       ViewModel.Command.getUserList
     }
     
-    
-    
+    let obPagination = tableView.rx.willDisplayCell
+      .map { ViewModel.Command.pagination(cell: $0.cell, indexPath: $0.indexPath) }
+
     Observable<ViewModel.Command>
       .merge([
         obViewDidLoad,
-        obUserList])
+        obUserList,
+        obPagination])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
     
   }
   
-  
+  //INPUT
   func state(viewModel: AllUserListViewModel) {
+
+    self.dataSource = RxTableViewSectionedReloadDataSource<SectionOfUserModel>(
+      configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: AllUserListCell.reuseIdentifier, for: indexPath) as? AllUserListCell {
+          cell.viewModel = AllUserListCellViewModel(model: item)
+          return cell
+        }
+        return UITableViewCell()
+    })
     
     viewModel.state
       .drive(onNext: { [weak self] state in
@@ -75,33 +94,23 @@ extension AllUserListViewController {
         
         switch state {
         case .viewDidLoadState:
-          self.tableView.delegate = self
-          self.tableView.dataSource = self
+          self.tableView.rowHeight = UITableView.automaticDimension
+          self.tableView.estimatedRowHeight = Constant.rowHeight
+//          self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
           
-        case .getUserListState(let userModels):
-          print(userModels)
-          self.userModels = userModels
-          self.tableView.reloadData()
+        case .getUserListState:
+          viewModel.allUserList
+            .bind(to: self.tableView.rx.items(dataSource: self.dataSource!))
+            .disposed(by: self.disposeBag)
+          
+        case .paginationState: return
         }
-        
       })
       .disposed(by: self.disposeBag)
   }
   
 }
 
-extension AllUserListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return userModels.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? AllUserListCell else { return UITableViewCell() }
-    cell.textLabel?.text = "1"
-    return cell
-  }
-}
+//extension AllUserListViewController: UITableViewDelegate {
 
-extension AllUserListViewController: UITableViewDelegate {
-  
-}
+//}

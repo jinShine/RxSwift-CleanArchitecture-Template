@@ -13,8 +13,8 @@ target 'RxTemplate' do
   pod 'RxDataSources', '~> 3.0'
   
   # Network
-  pod 'Moya', '~> 13.0'
-  pod 'Moya/RxSwift', '~> 13.0'
+  pod 'Moya', '~> 13.0.1'
+  pod 'Moya/RxSwift', '~> 13.0.1'
   
   # image
   pod 'Kingfisher', '~> 4.0'

@@ -28,8 +28,8 @@ extension BindViewModelType {
   
     state = Observable<State>.merge(self.stateSubject.asObserver(),
                                     self.command
-                                      .flatMapLatest { self.toAction(from: $0) }
-                                      .flatMapLatest { self.toState(from: $0) }
+                                      .flatMap { self.toAction(from: $0) }
+                                      .flatMap { self.toState(from: $0) }
       ).asDriver { error in
         return Driver.empty()
     }

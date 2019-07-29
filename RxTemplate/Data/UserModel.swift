@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import RxDataSources
+
+struct SectionOfUserModel {
+  var header: String
+  var items: [UserModel]
+}
 
 struct UserModel: Decodable {
     var id: Int = 0
@@ -20,3 +26,11 @@ struct UserModel: Decodable {
     }
 }
 
+extension SectionOfUserModel: SectionModelType {
+  
+  init(original: SectionOfUserModel, items: [UserModel]) {
+    self = original
+    self.items = items
+  }
+
+}

@@ -550,18 +550,7 @@ extension String {
 //  }
 //}
 //
-// MARK: CellName
-extension UICollectionReusableView {
-  static var reuseIdentifier: String {
-    return String(describing: self)
-  }
-}
 
-extension UITableViewCell {
-    static var reuseIdentifier: String {
-        return String(describing: self)
-    }
-}
 
 //// MARK: Email
 //extension MFMailComposeViewController {

@@ -1,6 +1,6 @@
 # RxSwiftTemplate
 
-RxSwift에 MVVM-C를 구성한 Clean Architecture 구현 Template
+RxSwift와 MVVM-C로 구현한 Clean Architecture Template
 
 
 ### 기본 라이브러리

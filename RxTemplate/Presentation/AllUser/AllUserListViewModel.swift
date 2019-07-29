@@ -20,18 +20,22 @@ final class AllUserListViewModel: BindViewModelType {
     case viewDidLoad
     case getUserList
     case pagination(cell: UITableViewCell, indexPath: IndexPath)
+    case didPullRefresh
   }
   
   enum Action {
     case viewDidLoadAction
     case getUserListAction
     case paginationAction(cell: UITableViewCell, indexPath: IndexPath)
+    case didPullRefreshAction
   }
   
   enum State {
     case viewDidLoadState
     case getUserListState
     case paginationState
+    case showRefreshingState(_ isRefreshing: Bool)
+    case didPullRefreshState
   }
   
   var command = PublishSubject<Command>()
@@ -58,6 +62,8 @@ final class AllUserListViewModel: BindViewModelType {
       return Observable<Action>.just(.getUserListAction)
     case .pagination(let cell, let indexPath):
       return Observable<Action>.just(.paginationAction(cell: cell, indexPath: indexPath))
+    case .didPullRefresh:
+      return Observable<Action>.just(.didPullRefreshAction)
     }
   }
   
@@ -68,6 +74,7 @@ final class AllUserListViewModel: BindViewModelType {
       
     case .getUserListAction:
       return allUserUseCase.allUser(since: 0)
+        .do { self.stateSubject.onNext(.showRefreshingState(true)) }
         .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
         .map { usermodels -> [SectionOfUserModel] in
           return [SectionOfUserModel(header: "", items: usermodels)]
@@ -75,24 +82,44 @@ final class AllUserListViewModel: BindViewModelType {
         .flatMap { [weak self] userListSection in
           self?.list = userListSection
           self?.allUserList.accept(userListSection)
-          return Single<State>.just(.getUserListState).retry(2)
+          return Single<State>.just(.getUserListState)
+            .retry(2)
+            .do { self?.stateSubject.onNext(.showRefreshingState(false)) }
         }.asObservable()
       
     case .paginationAction(_, let indexPath):
       guard indexPath.row + 1 == self.pagePerCount else {
         return Observable<State>.just(.paginationState)
       }
-      print(pagePerCount)
       pagePerCount += Constant.pagePerCount
       return allUserUseCase.allUser(since: pagePerCount)
+        .do { self.stateSubject.onNext(.showRefreshingState(true)) }
         .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
         .map { [weak self] userModel -> [SectionOfUserModel] in
           userModel.forEach { self?.list[0].items.append($0) }
           return [SectionOfUserModel(header: "", items: self?.list[0].items ?? [])]}
         .map { [weak self] in self?.allUserList.accept($0) }
         .flatMap { _ in
-          return Single<State>.just(.paginationState).retry(2) }
-        .asObservable()
+          return Single<State>.just(.paginationState)
+            .retry(2)
+            .do { self.stateSubject.onNext(.showRefreshingState(false)) }
+        }.asObservable()
+      
+    case .didPullRefreshAction:
+      return allUserUseCase.allUser(since: 0)
+        .do { self.stateSubject.onNext(.showRefreshingState(true)) }
+        .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+        .map { usermodels -> [SectionOfUserModel] in
+          return [SectionOfUserModel(header: "", items: usermodels)]
+        }
+        .flatMap { [weak self] userListSection in
+          self?.list = userListSection
+          self?.allUserList.accept(userListSection)
+          return Single<State>.just(.didPullRefreshState)
+            .retry(2)
+            .do { self?.stateSubject.onNext(.showRefreshingState(false)) }
+        }.asObservable()
+      
     }
   }
   

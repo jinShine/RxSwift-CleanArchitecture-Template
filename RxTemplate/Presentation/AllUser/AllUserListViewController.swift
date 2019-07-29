@@ -21,6 +21,8 @@ final class AllUserListViewController: BaseViewController, BindViewType {
   
   //MARK: - UI Properties
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var indicator: UIActivityIndicatorView!
+  let refreshControl = UIRefreshControl()
   
   
   //MARK: - Properties
@@ -45,6 +47,7 @@ final class AllUserListViewController: BaseViewController, BindViewType {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    
   }
   
 }
@@ -65,12 +68,19 @@ extension AllUserListViewController {
     
     let obPagination = tableView.rx.willDisplayCell
       .map { ViewModel.Command.pagination(cell: $0.cell, indexPath: $0.indexPath) }
-
+    
+    
+    
+//    let refreshControl = tableView.refreshControl ?? UIRefreshControl()
+    let obDidPullRefresh = refreshControl.rx.controlEvent(.valueChanged)
+      .map { ViewModel.Command.didPullRefresh }
+    
     Observable<ViewModel.Command>
       .merge([
         obViewDidLoad,
         obUserList,
-        obPagination])
+        obPagination,
+        obDidPullRefresh])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
     
@@ -96,21 +106,30 @@ extension AllUserListViewController {
         case .viewDidLoadState:
           self.tableView.rowHeight = UITableView.automaticDimension
           self.tableView.estimatedRowHeight = Constant.rowHeight
+          self.tableView.refreshControl = self.refreshControl
+          
 //          self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
           
         case .getUserListState:
           viewModel.allUserList
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource!))
             .disposed(by: self.disposeBag)
-          
+
         case .paginationState: return
+        case .showRefreshingState(let isRefreshing):
+          print(isRefreshing)
+          if !isRefreshing {
+            self.tableView.refreshControl?.endRefreshing()
+            self.indicator.stopAnimating()
+            self.indicator.hidesWhenStopped = !isRefreshing
+          } else {
+            self.indicator.startAnimating()
+          }
+          
+        case .didPullRefreshState: return
         }
       })
       .disposed(by: self.disposeBag)
   }
   
 }
-
-//extension AllUserListViewController: UITableViewDelegate {
-
-//}

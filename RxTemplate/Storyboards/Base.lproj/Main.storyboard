@@ -70,17 +70,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7Wm-r1-nfe">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QMC-jp-fx4" secondAttribute="trailing" id="5xy-6a-CXl"/>
                             <constraint firstItem="QMC-jp-fx4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HWt-Hk-yvz"/>
                             <constraint firstItem="QMC-jp-fx4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XQs-Vj-ySx"/>
+                            <constraint firstItem="7Wm-r1-nfe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zce-Pc-cvT"/>
+                            <constraint firstItem="7Wm-r1-nfe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dpK-i3-bjn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QMC-jp-fx4" secondAttribute="bottom" id="tqd-gG-spy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="indicator" destination="7Wm-r1-nfe" id="jA8-pk-U5c"/>
                         <outlet property="tableView" destination="QMC-jp-fx4" id="YBr-Ww-Llf"/>
                     </connections>
                 </viewController>

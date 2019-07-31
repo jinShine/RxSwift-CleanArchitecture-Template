@@ -62,29 +62,29 @@ extension AllUserListViewController {
       ViewModel.Command.viewDidLoad
     }
     
-    let obUserList = rx.viewWillAppear.map { _ in
-      ViewModel.Command.getUserList
+    let obRequestUserList = rx.viewWillAppear.map { _ in
+      ViewModel.Command.requestUserList
     }
     
-    let obPagination = tableView.rx.willDisplayCell
-      .map { ViewModel.Command.pagination(cell: $0.cell, indexPath: $0.indexPath) }
+    let obDidPagination = tableView.rx.willDisplayCell
+      .map { ViewModel.Command.didPagination(cell: $0.cell, indexPath: $0.indexPath) }
     
     
-    
-//    let refreshControl = tableView.refreshControl ?? UIRefreshControl()
     let obDidPullRefresh = refreshControl.rx.controlEvent(.valueChanged)
       .map { ViewModel.Command.didPullRefresh }
+    
     
     Observable<ViewModel.Command>
       .merge([
         obViewDidLoad,
-        obUserList,
-        obPagination,
+        obRequestUserList,
+        obDidPagination,
         obDidPullRefresh])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
     
   }
+  
   
   //INPUT
   func state(viewModel: AllUserListViewModel) {
@@ -104,32 +104,42 @@ extension AllUserListViewController {
         
         switch state {
         case .viewDidLoadState:
-          self.tableView.rowHeight = UITableView.automaticDimension
-          self.tableView.estimatedRowHeight = Constant.rowHeight
-          self.tableView.refreshControl = self.refreshControl
+          self.setupTableView()
           
-//          self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
-          
-        case .getUserListState:
+        case .requestUserListState:
           viewModel.allUserList
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource!))
             .disposed(by: self.disposeBag)
 
-        case .paginationState: return
+        case .didPaginationState: return
+          
         case .showRefreshingState(let isRefreshing):
-          print(isRefreshing)
           if !isRefreshing {
-            self.tableView.refreshControl?.endRefreshing()
             self.indicator.stopAnimating()
             self.indicator.hidesWhenStopped = !isRefreshing
+            self.tableView.refreshControl?.endRefreshing()
           } else {
             self.indicator.startAnimating()
           }
           
         case .didPullRefreshState: return
+          
         }
       })
       .disposed(by: self.disposeBag)
+  }
+  
+}
+
+
+//MARK: - Method Handler
+extension AllUserListViewController {
+  
+  private func setupTableView() {
+    self.tableView.rowHeight = UITableView.automaticDimension
+    self.tableView.estimatedRowHeight = Constant.rowHeight
+    self.tableView.refreshControl = self.refreshControl
+    //self.tableView.rx.setDelegate(self).disposed(by: self.disposeBag)
   }
   
 }

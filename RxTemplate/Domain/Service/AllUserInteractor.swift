@@ -15,7 +15,7 @@ protocol AllUserUseCase {
 final class AllUserInteractor: AllUserUseCase {
   
   func allUser(since: Int) -> Single<[UserModel]> {
-    return NetworkService.shared.buildRequest(to: Router.allUser(since: since))
+    return App.service.buildRequest(to: Router.allUser(since: since))
       .map { response in
         do {
           let result = try JSONDecoder().decode([UserModel].self, from: response.jsonData ?? Data())

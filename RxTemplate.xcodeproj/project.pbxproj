@@ -14,10 +14,7 @@
 		5C5F85FB22E96CC90051F917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F85F922E96CC90051F917 /* LaunchScreen.storyboard */; };
 		5C5F860C22E974900051F917 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F860B22E974900051F917 /* App.swift */; };
 		5C5F860E22E976110051F917 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F860D22E976110051F917 /* Router.swift */; };
-		5C5F861622E9A77D0051F917 /* CommonReactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861222E9A76D0051F917 /* CommonReactive.swift */; };
-		5C5F861722E9A7840051F917 /* CommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861422E9A76D0051F917 /* CommonFunc.swift */; };
 		5C5F861822E9A7870051F917 /* CommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861522E9A76D0051F917 /* CommonExtension.swift */; };
-		5C5F861922E9A7890051F917 /* CommonEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861322E9A76D0051F917 /* CommonEnum.swift */; };
 		5C5F861E22E9AB7F0051F917 /* NetworkErrorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861D22E9AB7F0051F917 /* NetworkErrorBuilder.swift */; };
 		5C5F862022E9AB880051F917 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F861F22E9AB880051F917 /* NetworkError.swift */; };
 		5C5F862422E9AE160051F917 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F862622E9AE160051F917 /* Localizable.strings */; };
@@ -46,9 +43,6 @@
 		5C5F85FC22E96CC90051F917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5F860B22E974900051F917 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		5C5F860D22E976110051F917 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		5C5F861222E9A76D0051F917 /* CommonReactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonReactive.swift; sourceTree = "<group>"; };
-		5C5F861322E9A76D0051F917 /* CommonEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnum.swift; sourceTree = "<group>"; };
-		5C5F861422E9A76D0051F917 /* CommonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunc.swift; sourceTree = "<group>"; };
 		5C5F861522E9A76D0051F917 /* CommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtension.swift; sourceTree = "<group>"; };
 		5C5F861D22E9AB7F0051F917 /* NetworkErrorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorBuilder.swift; sourceTree = "<group>"; };
 		5C5F861F22E9AB880051F917 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -133,10 +127,7 @@
 		5C5F860422E96E0A0051F917 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				5C5F861322E9A76D0051F917 /* CommonEnum.swift */,
 				5C5F861522E9A76D0051F917 /* CommonExtension.swift */,
-				5C5F861422E9A76D0051F917 /* CommonFunc.swift */,
-				5C5F861222E9A76D0051F917 /* CommonReactive.swift */,
 				5C6CB20722EB005600B27447 /* UIViewController+Rx.swift */,
 				5C6CB21422EEC3FC00B27447 /* UIView+Extension.swift */,
 			);
@@ -394,10 +385,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C5F861622E9A77D0051F917 /* CommonReactive.swift in Sources */,
 				5C5F860C22E974900051F917 /* App.swift in Sources */,
 				5C5F860E22E976110051F917 /* Router.swift in Sources */,
-				5C5F861722E9A7840051F917 /* CommonFunc.swift in Sources */,
 				5C6CB20A22EB011500B27447 /* BaseViewController.swift in Sources */,
 				5C5F861822E9A7870051F917 /* CommonExtension.swift in Sources */,
 				5C5F862F22EACCF90051F917 /* Navigator.swift in Sources */,
@@ -409,7 +398,6 @@
 				5C5F863322EACDCE0051F917 /* AllUserListViewController.swift in Sources */,
 				5C5F862022E9AB880051F917 /* NetworkError.swift in Sources */,
 				5C6CB21322EEB91100B27447 /* AllUserListCellViewModel.swift in Sources */,
-				5C5F861922E9A7890051F917 /* CommonEnum.swift in Sources */,
 				5C6CB20822EB005600B27447 /* UIViewController+Rx.swift in Sources */,
 				5C5F863522EACDDA0051F917 /* AllUserListViewModel.swift in Sources */,
 				5C6CB20622EAFE4400B27447 /* AllUserListCell.swift in Sources */,

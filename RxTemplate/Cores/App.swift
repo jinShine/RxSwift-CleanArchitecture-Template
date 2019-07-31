@@ -10,9 +10,9 @@ import RxSwift
 import RxCocoa
 
 struct App {
-  static let delegate: AppDelegate = UIApplication.shared.delegate
-   as! AppDelegate
   
+  static let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+  static let service: NetworkService = NetworkService.shared
   
   
 }

@@ -16,10 +16,18 @@ final class AllUserListCell: UITableViewCell {
   @IBOutlet weak var profileImage: UIImageView!
   
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+  }
+  
+  
   var viewModel: AllUserListCellViewModel! {
     didSet {
       id.text = "\(viewModel.id ?? 0)"
+      
       nickName.text = viewModel.name
+      
       if let profile = viewModel.profileImage,
         let url = URL(string: profile) {
           profileImage.kf.setImage(with: url)
@@ -27,15 +35,5 @@ final class AllUserListCell: UITableViewCell {
     }
   }
   
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-
 }
 

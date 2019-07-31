@@ -1,9 +1,9 @@
 //
 //  UserModel.swift
-//  SVmiOS
+//  RxTemplate
 //
-//  Created by 승진김 on 06/03/2019.
-//  Copyright © 2019 승진김. All rights reserved.
+//  Created by Seungjin on 26/07/2019.
+//  Copyright © 2019 Jinnify. All rights reserved.
 //
 
 import Foundation

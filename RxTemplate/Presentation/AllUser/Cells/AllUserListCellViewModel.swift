@@ -9,6 +9,7 @@
 import UIKit
 
 struct AllUserListCellViewModel {
+  
   var id: Int?
   var name: String?
   var profileImage: String?

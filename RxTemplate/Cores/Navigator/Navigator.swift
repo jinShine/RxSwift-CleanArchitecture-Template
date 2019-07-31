@@ -14,6 +14,7 @@ enum Navigator {
 }
 
 extension Navigator {
+  
   var viewController: UIViewController {
     switch self {
     case .allUser:
@@ -22,4 +23,5 @@ extension Navigator {
       return viewController
     }
   }
+  
 }

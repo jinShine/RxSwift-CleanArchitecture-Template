@@ -8,3 +8,4 @@ CleanArchitecture sample app implemented with RxSwift and MVVM-C
 * RxCocoa
 * RxDataSource
 * Moya
+* FlowInject

@@ -56,7 +56,6 @@ final class AllUserListViewModel: BindViewModelType {
   private let allUserUseCase: AllUserUseCase
   
   
-  
   //MARK: - Initialize
   init(allUserUseCase: AllUserUseCase) {
     self.allUserUseCase = allUserUseCase

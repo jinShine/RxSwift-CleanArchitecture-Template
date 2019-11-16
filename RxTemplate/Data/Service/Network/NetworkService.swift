@@ -11,9 +11,7 @@ import Moya
 import Alamofire
 
 struct NetworkService {
-  
-  static let shared = NetworkService()
-  
+
   static private let sharedManager: Alamofire.SessionManager = {
     let configuration = URLSessionConfiguration.default
     configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders

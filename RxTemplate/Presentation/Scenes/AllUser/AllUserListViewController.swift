@@ -68,7 +68,7 @@ extension AllUserListViewController {
     
     let obDidPagination = tableView.rx.willDisplayCell
       .map { ViewModel.Command.didPagination(cell: $0.cell, indexPath: $0.indexPath) }
-    
+//
     
     let obDidPullRefresh = refreshControl.rx.controlEvent(.valueChanged)
       .map { ViewModel.Command.didPullRefresh }

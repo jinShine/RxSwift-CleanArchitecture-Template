@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 enum Navigator {
-  case allUser
+  case allUser(AllUserListViewModel)
 }
 
 extension Navigator {
@@ -18,7 +18,7 @@ extension Navigator {
   var viewController: UIViewController {
     switch self {
     case .allUser:
-      let viewModel = AllUserListViewModel(allUserUseCase: AllUserInteractor())
+      let viewModel = AllUserListViewModel(allUserUseCase: AllUserRepository(networkService: NetworkService()))
       let viewController = AllUserListViewController(viewModel: viewModel)
       return viewController
     }

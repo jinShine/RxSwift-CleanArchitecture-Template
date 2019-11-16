@@ -13,12 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
     /// DI
+    
+//    let viewModel = AllUserListViewModel(allUserUseCase: AllUserRepository(networkService: NetworkService()))
+//    window?.rootViewController = Navigator.allUser(viewModel).viewController
     if let allUserListVC = window?.rootViewController as? AllUserListViewController {
-      allUserListVC.viewModel = AllUserListViewModel(allUserUseCase: AllUserInteractor())
+      allUserListVC.viewModel = AllUserListViewModel(allUserUseCase: AllUserRepository(networkService: NetworkService()))
     }
     
     return true

@@ -23,5 +23,4 @@ extension Navigator {
       return viewController
     }
   }
-  
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		443273C1D64EABF803B106D3 /* Pods_RxTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 805AE5FFD15F85767D3F6271 /* Pods_RxTemplate.framework */; };
 		5C1910822380048800E76FEB /* AllUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1910812380048800E76FEB /* AllUserRepository.swift */; };
+		5C19108A2381ACE700E76FEB /* UserModel+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1910892381ACE700E76FEB /* UserModel+Decodable.swift */; };
 		5C5F85F122E96CC80051F917 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F85F022E96CC80051F917 /* AppDelegate.swift */; };
 		5C5F85F622E96CC80051F917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F85F422E96CC80051F917 /* Main.storyboard */; };
 		5C5F85F822E96CC90051F917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F85F722E96CC90051F917 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		5C1910812380048800E76FEB /* AllUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllUserRepository.swift; path = RxTemplate/Data/AllUserRepository.swift; sourceTree = SOURCE_ROOT; };
+		5C1910892381ACE700E76FEB /* UserModel+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserModel+Decodable.swift"; sourceTree = "<group>"; };
 		5C5F85ED22E96CC80051F917 /* RxTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5F85F022E96CC80051F917 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C5F85F522E96CC80051F917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,31 @@
 				5C1910812380048800E76FEB /* AllUserRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		5C1910842381ABEF00E76FEB /* NetworkData */ = {
+			isa = PBXGroup;
+			children = (
+				5C1910862381AC9B00E76FEB /* Entity */,
+				5C1910802380043800E76FEB /* Repository */,
+				5C5F860722E96F000051F917 /* Service */,
+			);
+			path = NetworkData;
+			sourceTree = "<group>";
+		};
+		5C1910852381AC4D00E76FEB /* DatabaseData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DatabaseData;
+			sourceTree = "<group>";
+		};
+		5C1910862381AC9B00E76FEB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				5C1910892381ACE700E76FEB /* UserModel+Decodable.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		5C5F85E422E96CC80051F917 = {
@@ -280,8 +307,8 @@
 		5C6CB20F22EB191B00B27447 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5C1910802380043800E76FEB /* Repository */,
-				5C5F860722E96F000051F917 /* Service */,
+				5C1910842381ABEF00E76FEB /* NetworkData */,
+				5C1910852381AC4D00E76FEB /* DatabaseData */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -426,6 +453,7 @@
 				5C5F861822E9A7870051F917 /* CommonExtension.swift in Sources */,
 				5C5F862F22EACCF90051F917 /* Navigator.swift in Sources */,
 				5C5F863822EAD4ED0051F917 /* BindViewType.swift in Sources */,
+				5C19108A2381ACE700E76FEB /* UserModel+Decodable.swift in Sources */,
 				5C5F861E22E9AB7F0051F917 /* NetworkErrorBuilder.swift in Sources */,
 				5C6CB21122EB19D500B27447 /* UserModel.swift in Sources */,
 				5C6CB21522EEC3FC00B27447 /* UIView+Extension.swift in Sources */,

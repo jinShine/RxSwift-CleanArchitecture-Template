@@ -9,21 +9,15 @@
 import Foundation
 import RxDataSources
 
-struct SectionOfUserModel {
-  var header: String
-  var items: [UserModel]
-}
-
-struct UserModel: Decodable {
+struct UserModel {
     var id: Int = 0
     var name: String = ""
     var profile: String = ""
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name = "login"
-        case profile = "avatar_url"
-    }
+}
+
+struct SectionOfUserModel {
+  var header: String
+  var items: [UserModel]
 }
 
 extension SectionOfUserModel: SectionModelType {

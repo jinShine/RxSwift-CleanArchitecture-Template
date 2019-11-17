@@ -11,16 +11,3 @@ import RxSwift
 protocol AllUserUseCase {
   func allUser(since: Int) -> Single<[UserModel]>
 }
-
-final class AllUserUseCaseImpl: AllUserUseCase {
-  
-  private let allUserRepository: AllUserRepository
-  
-  init(allUserRepository: AllUserRepository) {
-    self.allUserRepository = allUserRepository
-  }
-  
-  func allUser(since: Int) -> Single<[UserModel]> {
-    allUserRepository.allUser(since: since)
-  }
-}

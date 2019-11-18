@@ -2,6 +2,8 @@
 
 CleanArchitecture sample app implemented with RxSwift and MVVM-C
 
+### Clean Architectrue
+![CleanArchitecture](https://i.imgur.com/Nk1Mi6Y.png)
 
 ### Used Library
 * RxSwift

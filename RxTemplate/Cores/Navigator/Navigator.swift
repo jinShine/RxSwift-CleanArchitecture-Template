@@ -18,7 +18,7 @@ extension Navigator {
   var viewController: UIViewController {
     switch self {
     case .allUser:
-      let viewModel = AllUserListViewModel(allUserUseCase: AllUserRepository(networkService: NetworkService()))
+      let viewModel = AllUserListViewModel(allUserUseCase: UserRepository())
       let viewController = AllUserListViewController(viewModel: viewModel)
       return viewController
     }

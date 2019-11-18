@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// DI
     if let allUserListVC = window?.rootViewController as? AllUserListViewController {
-      allUserListVC.viewModel = AllUserListViewModel(allUserUseCase: AllUserRepository(networkService: NetworkService()))
+      allUserListVC.viewModel = AllUserListViewModel(allUserUseCase: UserRepository(networkService: NetworkService()))
     }
     
     return true

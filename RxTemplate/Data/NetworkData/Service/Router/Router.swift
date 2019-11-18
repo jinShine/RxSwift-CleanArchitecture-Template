@@ -9,7 +9,7 @@
 import Moya
 
 enum Router {
-  case allUser(since: Int)
+  case searchUser(since: Int)
 }
 
 enum RouterError: Error {
@@ -34,21 +34,21 @@ extension Router: TargetType {
   
   var path: String {
     switch self {
-    case .allUser:
+    case .searchUser:
       return "/users"
     }
   }
   
   var method: Method {
     switch self {
-    case .allUser:
+    case .searchUser:
       return .get
     }
   }
   
   var parameters: [String: Any]? {
     switch self {
-    case .allUser(let since):
+    case .searchUser(let since):
       return [
         "since" : since,
         "client_id" : Router.clientID,
@@ -59,14 +59,14 @@ extension Router: TargetType {
   
   var task: Task {
     switch self {
-    case .allUser:
+    case .searchUser:
       return .requestParameters(parameters: parameters!, encoding: URLEncoding.default)
     }
   }
   
   var headers: [String : String]? {
     switch self {
-    case .allUser:
+    case .searchUser:
       return [:]
     }
   }

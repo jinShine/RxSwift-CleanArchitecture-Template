@@ -8,7 +8,7 @@
 
 import RxSwift
 
-final class AllUserRepository {
+final class UserRepository {
   
   private let networkService: NetworkService
   
@@ -18,10 +18,10 @@ final class AllUserRepository {
   
 }
 
-extension AllUserRepository: AllUserUseCase {
+extension UserRepository: UserUseCase {
   
-  func allUser(since: Int) -> Single<[UserModel]> {
-    return networkService.buildRequest(to: Router.allUser(since: since))
+  func searchUser(since: Int) -> Single<[UserModel]> {
+    return networkService.buildRequest(to: Router.searchUser(since: since))
     .map { response in
       do {
         let result = try JSONDecoder().decode([UserModel].self, from: response.jsonData ?? Data())

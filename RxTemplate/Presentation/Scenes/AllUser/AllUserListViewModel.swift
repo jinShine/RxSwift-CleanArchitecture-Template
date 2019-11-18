@@ -53,11 +53,11 @@ final class AllUserListViewModel: BindViewModelType {
   
   private var list: [SectionOfUserModel] = []
   private var pagePerCount = Constant.pagePerCount
-  private let allUserUseCase: AllUserUseCase
+  private let allUserUseCase: UserUseCase
   
   
   //MARK: - Initialize
-  init(allUserUseCase: AllUserUseCase) {
+  init(allUserUseCase: UserUseCase) {
     self.allUserUseCase = allUserUseCase
     self.bind()
   }
@@ -93,7 +93,7 @@ final class AllUserListViewModel: BindViewModelType {
       
       pagePerCount += Constant.pagePerCount
       
-      return allUserUseCase.allUser(since: pagePerCount)
+      return allUserUseCase.searchUser(since: pagePerCount)
         .do { self.showRefreshing(true) }
         .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
         .map { [weak self] userModel -> [SectionOfUserModel] in
@@ -123,7 +123,7 @@ extension AllUserListViewModel {
   }
   
   private func fetchUserList() -> Observable<State> {
-    return allUserUseCase.allUser(since: 0)
+    return allUserUseCase.searchUser(since: 0)
       .do { self.showRefreshing(true) }
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
       .map { usermodels -> [SectionOfUserModel] in

@@ -1,6 +1,6 @@
 # RxSwiftTemplate
 
-CleanArchitecture sample app implemented with RxSwift and MVVM-C
+CleanArchitecture sample app implemented with RxSwift and MVVM-C 📦
 
 </br>
 
